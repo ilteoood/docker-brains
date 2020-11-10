@@ -1,0 +1,31 @@
+name: Build and publish image
+on:
+  push:
+  schedule:
+    - cron: '0 6 * * 1'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        name: Build and publish image job
+        strategy:
+          matrix:
+            ide: ['webstorm']
+            variant: ['vnc', 'x11']
+        steps:
+            - name: Checkout master
+              uses: actions/checkout@master
+            - name: Retrieve latest version
+              id: latest-version
+              run: |
+                echo "::set-output name=ide-version::$(bash ${{ matrix.ide }}/version.sh)\n"
+            - name: Build and publish image
+              uses: ilteoood/docker_buildx@master
+              with:
+                tag: latest,${{ steps.latest-version.output.ide-version }}
+                imageName: ilteoood/${{ matrix.ide }}-${{ matrix.variant }}
+                platform: linux/amd64,linux/arm64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6
+                publish: true
+                dockerHubUser: ilteoood
+                dockerHubPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
+                dockerFile: ${{ matrix.ide }}/Dockerfile-${{ matrix.variant }}
