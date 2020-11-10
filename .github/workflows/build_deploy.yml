@@ -10,7 +10,7 @@ jobs:
         name: Build and publish image job
         strategy:
           matrix:
-            ide: ['webstorm', 'intellij_community']
+            ide: ['webstorm', 'intellij_community', 'intellij_ultimate']
             variant: ['vnc', 'x11']
         steps:
             - name: Checkout master
