@@ -19,11 +19,12 @@ jobs:
             - name: Retrieve latest version
               id: latest-version
               run: |
-                echo "::set-output name=ide-version::$(bash ${{ matrix.ide }}/version.sh)\n"
+                version=$(bash ${{ matrix.ide }}/version.sh)
+                echo "::set-output name=ide-version::$version"
             - name: Build and publish image
               uses: ilteoood/docker_buildx@master
               with:
-                tag: latest,${{ steps.latest-version.output.ide-version }}
+                tag: latest,${{ steps.latest-version.outputs.ide-version }}
                 imageName: ilteoood/${{ matrix.ide }}-${{ matrix.variant }}
                 platform: linux/amd64,linux/arm64,linux/arm/v7
                 publish: true
