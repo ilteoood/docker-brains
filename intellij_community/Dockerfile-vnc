@@ -5,7 +5,8 @@ RUN apk add --no-cache curl && \
 
 FROM debian:stable-slim
 COPY --from=downloader idea /opt/idea
-RUN apt-get update && \
+RUN mkdir -p /usr/share/man/man1 && \
+    apt-get update && \
     apt-get install -y libxtst-dev libxext-dev libxrender-dev libfreetype6-dev libfontconfig1 libgtk2.0-0 libxslt1.1 libxxf86vm1 && \
     apt-get install -y x11vnc xvfb novnc && \
     apt-get install -y openjdk-11-jdk git && \
