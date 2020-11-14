@@ -1,13 +1,13 @@
 FROM alpine:latest as downloader
 RUN apk add --no-cache curl && \
     curl -L "https://download.jetbrains.com/product?code=CL&latest&distribution=linux" | tar -xvz && \
-    mv idea* idea
+    mv clion* clion
 
 FROM debian:stable-slim
-COPY --from=downloader idea /opt/idea
+COPY --from=downloader clion /opt/clion
 RUN mkdir -p /usr/share/man/man1 && \
     apt-get update && \
     apt-get install -y libxtst-dev libxext-dev libxrender-dev libfreetype6-dev libfontconfig1 libgtk2.0-0 libxslt1.1 libxxf86vm1 && \
     apt-get install -y build-essential git && \
     apt-get autoremove --purge && apt-get autoclean
-ENTRYPOINT /opt/idea/bin/idea.sh
+ENTRYPOINT /opt/clion/bin/clion.sh
