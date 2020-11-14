@@ -11,7 +11,7 @@ jobs:
         strategy:
           max-parallel: 2
           matrix:
-            ide: ['webstorm', 'intellij_community', 'intellij_ultimate', 'phpstorm', 'pycharm_professional', 'pycharm_edu']
+            ide: ['webstorm', 'intellij_community', 'intellij_ultimate', 'phpstorm', 'pycharm_professional', 'pycharm_edu', 'clion']
             variant: ['vnc', 'x11']
         steps:
             - name: Checkout master

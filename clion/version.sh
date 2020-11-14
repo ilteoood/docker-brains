@@ -1,0 +1,1 @@
+curl "https://data.services.jetbrains.com/products/releases?code=CL&latest" | python3 -c "import sys, json; print(json.load(sys.stdin)['CL'][0]['version'])"
