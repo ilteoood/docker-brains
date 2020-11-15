@@ -10,7 +10,7 @@ jobs:
         name: Build and publish image job
         strategy:
           max-parallel: 2
-          fail_fast: false
+          fail-fast: false
           matrix:
             ide: ['webstorm', 'intellij_edu', 'intellij_community', 'intellij_ultimate', 'phpstorm', 'pycharm_professional', 'pycharm_edu', 'clion', 'rubymine', 'goland']
             variant: ['vnc', 'x11']

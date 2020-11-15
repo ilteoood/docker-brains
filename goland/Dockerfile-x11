@@ -3,12 +3,11 @@ RUN apk add --no-cache curl && \
     curl -L "https://download.jetbrains.com/product?code=GO&latest&distribution=linux" | tar -xvz && \
     mv GoLand* goland
 
-FROM debian:stable-slim
+FROM golang:buster
 COPY --from=downloader goland /opt/goland
 RUN mkdir -p /usr/share/man/man1 && \
     apt-get update && \
     apt-get install -y libxtst-dev libxext-dev libxrender-dev libfreetype6-dev libfontconfig1 libgtk2.0-0 libxslt1.1 libxxf86vm1 && \
-    apt-get install -y git software-properties-common && \
-    add-apt-repository ppa:longsleep/golang-backports && apt-get update && apt-get install golang-go && \
+    apt-get install -y git && \
     apt-get autoremove --purge && apt-get autoclean
 ENTRYPOINT /opt/goland/bin/goland.sh
