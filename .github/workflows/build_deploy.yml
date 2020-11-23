@@ -11,27 +11,28 @@ jobs:
         steps:
           - name: Checkout master
             uses: actions/checkout@master
-          - name: Build and publish image
-              uses: ilteoood/docker_buildx@master
-              with:
-                tag: latest
-                imageName: ilteoood/base-x11
-                platform: linux/amd64,linux/arm64,linux/arm/v7
-                publish: true
-                dockerHubUser: ilteoood
-                dockerHubPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
-                dockerFile: base_image/Dockerfile-x11
-          - name: Build and publish image
-              uses: ilteoood/docker_buildx@master
-              with:
-                tag: latest
-                imageName: ilteoood/base-vnc
-                platform: linux/amd64,linux/arm64,linux/arm/v7
-                publish: true
-                dockerHubUser: ilteoood
-                dockerHubPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
-                dockerFile: base_image/Dockerfile-vnc
+          - name: Build and publish X11 image
+            uses: ilteoood/docker_buildx@master
+            with:
+              tag: latest
+              imageName: ilteoood/base-x11
+              platform: linux/amd64,linux/arm64,linux/arm/v7
+              publish: true
+              dockerHubUser: ilteoood
+              dockerHubPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
+              dockerFile: base_image/Dockerfile-x11
+          - name: Build and publish VNC image
+            uses: ilteoood/docker_buildx@master
+            with:
+              tag: latest
+              imageName: ilteoood/base-vnc
+              platform: linux/amd64,linux/arm64,linux/arm/v7
+              publish: true
+              dockerHubUser: ilteoood
+              dockerHubPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
+              dockerFile: base_image/Dockerfile-vnc
     buildIde:
+        needs: [buildBase]
         runs-on: ubuntu-latest
         name: Build and publish image job
         strategy:
