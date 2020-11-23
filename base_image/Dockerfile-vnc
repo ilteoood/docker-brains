@@ -1,0 +1,4 @@
+FROM ilteoood/base-x11
+RUN apt-get update && \
+    apt-get install -y x11vnc xvfb novnc && \
+    apt-get autoremove --purge && apt-get autoclean
