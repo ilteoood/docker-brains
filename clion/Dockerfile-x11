@@ -6,6 +6,6 @@ RUN apk add --no-cache curl && \
 FROM ilteoood/base-x11
 COPY --from=downloader clion /opt/clion
 RUN apt-get update && \
-    apt-get install -y build-essential git && \
+    apt-get install -y build-essential && \
     apt-get autoremove --purge && apt-get autoclean
 ENTRYPOINT /opt/clion/bin/clion.sh

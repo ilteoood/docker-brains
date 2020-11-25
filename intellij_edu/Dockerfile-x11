@@ -5,7 +5,4 @@ RUN apk add --no-cache curl && \
 
 FROM ilteoood/base-x11
 COPY --from=downloader idea /opt/idea
-RUN apt-get update && \
-    apt-get install -y openjdk-11-jdk git && \
-    apt-get autoremove --purge && apt-get autoclean
 ENTRYPOINT /opt/idea/bin/idea.sh

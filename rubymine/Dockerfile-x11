@@ -6,6 +6,6 @@ RUN apk add --no-cache curl && \
 FROM ilteoood/base-x11
 COPY --from=downloader rubymine /opt/rubymine
 RUN apt-get update && \
-    apt-get install -y ruby-full git && \
+    apt-get install -y ruby-full && \
     apt-get autoremove --purge && apt-get autoclean
 ENTRYPOINT /opt/rubymine/bin/rubymine.sh

@@ -6,6 +6,6 @@ RUN apk add --no-cache curl && \
 FROM ilteoood/base-x11
 COPY --from=downloader webstorm /opt/webstorm
 RUN apt-get update && \
-    apt-get install -y nodejs git yarn && \
+    apt-get install -y nodejs yarn && \
     apt-get autoremove --purge && apt-get autoclean
 ENTRYPOINT /opt/webstorm/bin/webstorm.sh

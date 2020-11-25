@@ -6,6 +6,6 @@ RUN apk add --no-cache curl && \
 FROM ilteoood/base-x11
 COPY --from=downloader pycharm /opt/pycharm
 RUN apt-get update && \
-    apt-get install -y git python3 && \
+    apt-get install -y python3 && \
     apt-get autoremove --purge && apt-get autoclean
 ENTRYPOINT /opt/pycharm/bin/pycharm.sh
