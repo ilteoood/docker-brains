@@ -2,7 +2,7 @@ name: Build and publish image
 on:
   push:
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: '0 8 * * 1'
 
 jobs:
     buildBase:
