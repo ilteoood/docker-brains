@@ -18,8 +18,8 @@ jobs:
               imageName: ilteoood/base-x11
               platform: linux/amd64,linux/arm64,linux/arm/v7
               publish: true
-              dockerHubUser: ilteoood
-              dockerHubPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
+              dockerUser: ilteoood
+              dockerPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
               dockerFile: base_image/Dockerfile-x11
           - name: Build and publish VNC image
             uses: ilteoood/docker_buildx@master
@@ -28,8 +28,8 @@ jobs:
               imageName: ilteoood/base-vnc
               platform: linux/amd64,linux/arm64,linux/arm/v7
               publish: true
-              dockerHubUser: ilteoood
-              dockerHubPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
+              dockerUser: ilteoood
+              dockerPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
               dockerFile: base_image/Dockerfile-vnc
     buildIde:
         needs: [buildBase]
@@ -56,6 +56,6 @@ jobs:
                 imageName: ilteoood/${{ matrix.ide }}-${{ matrix.variant }}
                 platform: linux/amd64,linux/arm64,linux/arm/v7
                 publish: true
-                dockerHubUser: ilteoood
-                dockerHubPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
+                dockerUser: ilteoood
+                dockerPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
                 dockerFile: ${{ matrix.ide }}/Dockerfile-${{ matrix.variant }}
