@@ -4,4 +4,4 @@ RUN apt update && \
     apt install -y --no-install-recommends openjdk-11-jdk && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/cache/apt && \
-    yes | projector autoinstall --config-name projector --ide-name "IntelliJ Idea Community ${IDE_VERSION}"
+    yes | projector autoinstall --config-name projector --ide-name "Idea_Community ${IDE_VERSION}"

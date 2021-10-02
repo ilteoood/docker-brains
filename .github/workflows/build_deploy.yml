@@ -13,7 +13,7 @@ jobs:
           max-parallel: 2
           fail-fast: false
           matrix:
-            ide: ['clion', 'goland', 'intellij_community', 'intellij_edu', 'intellij_ultimate', 'phpstorm', 'pycharm_edu', 'pycharm_pro', 'rubymine', 'webstorm']
+            ide: ['clion', 'datagrip', 'goland', 'intellij_community', 'intellij_edu', 'intellij_ultimate', 'phpstorm', 'pycharm_edu', 'pycharm_pro', 'rubymine', 'webstorm']
             variant: ['2021.2.2']
         steps:
             - name: Checkout master
