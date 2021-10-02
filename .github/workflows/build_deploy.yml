@@ -16,7 +16,7 @@ jobs:
             with:
               tag: latest
               imageName: ilteoood/projector-base
-              platform: linux/amd64,linux/arm64,linux/arm/v7
+              platform: linux/amd64,linux/arm64
               publish: true
               dockerUser: ilteoood
               dockerPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
@@ -39,7 +39,7 @@ jobs:
               with:
                 tag: ${{ matrix.variant }}
                 imageName: ilteoood/${{ matrix.ide }}
-                platform: linux/amd64,linux/arm64,linux/arm/v7
+                platform: linux/amd64,linux/arm64
                 publish: true
                 dockerUser: ilteoood
                 dockerPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
