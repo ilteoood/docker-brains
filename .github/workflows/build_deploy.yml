@@ -33,4 +33,4 @@ jobs:
                 dockerUser: ilteoood
                 dockerPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
                 dockerFile: ${{ matrix.ide }}/Dockerfile
-                buildArg: IDE_VERSION="${{ matrix.ide }} ${{ matrix.variant }}"
+                buildArg: IDE_VERSION='${{ matrix.ide }} ${{ matrix.variant }}'
