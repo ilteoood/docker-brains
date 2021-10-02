@@ -11,26 +11,16 @@ jobs:
         steps:
           - name: Checkout master
             uses: actions/checkout@master
-          - name: Build and publish X11 image
+          - name: Build and publish projector base image
             uses: ilteoood/docker_buildx@master
             with:
               tag: latest
-              imageName: ilteoood/base-x11
+              imageName: ilteoood/projector-base
               platform: linux/amd64,linux/arm64,linux/arm/v7
               publish: true
               dockerUser: ilteoood
               dockerPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
-              dockerFile: base_image/Dockerfile-x11
-          - name: Build and publish VNC image
-            uses: ilteoood/docker_buildx@master
-            with:
-              tag: latest
-              imageName: ilteoood/base-vnc
-              platform: linux/amd64,linux/arm64,linux/arm/v7
-              publish: true
-              dockerUser: ilteoood
-              dockerPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
-              dockerFile: base_image/Dockerfile-vnc
+              dockerFile: base_image/Dockerfile
     buildIde:
         needs: [buildBase]
         runs-on: ubuntu-latest
@@ -39,8 +29,8 @@ jobs:
           max-parallel: 2
           fail-fast: false
           matrix:
-            ide: ['webstorm', 'intellij_edu', 'intellij_community', 'intellij_ultimate', 'phpstorm', 'pycharm_professional', 'pycharm_edu', 'clion', 'rubymine', 'goland']
-            variant: ['vnc', 'x11']
+            ide: ['CLion', 'GoLand', 'IntelliJ Idea Community', 'IntelliJ Idea Education', 'IntelliJ Idea Ultimate', 'PhpStorm', 'PyCharm Education', 'PyCharm Professional', 'RubyMine', 'WebStorm']
+            variant: ['2021.2.3', '2020.3.5']
         steps:
             - name: Checkout master
               uses: actions/checkout@master
@@ -52,10 +42,10 @@ jobs:
             - name: Build and publish image
               uses: ilteoood/docker_buildx@master
               with:
-                tag: latest,${{ steps.latest-version.outputs.ide-version }}
-                imageName: ilteoood/${{ matrix.ide }}-${{ matrix.variant }}
+                tag: ${{ matrix.variant }}
+                imageName: ilteoood/${{ matrix.ide }}
                 platform: linux/amd64,linux/arm64,linux/arm/v7
                 publish: true
                 dockerUser: ilteoood
                 dockerPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
-                dockerFile: ${{ matrix.ide }}/Dockerfile-${{ matrix.variant }}
+                dockerFile: ${{ matrix.ide }}/Dockerfile

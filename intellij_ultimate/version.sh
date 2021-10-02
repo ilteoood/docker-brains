@@ -1,1 +1,0 @@
-curl "https://data.services.jetbrains.com/products/releases?code=IIU&latest" | python3 -c "import sys, json; print(json.load(sys.stdin)['IIU'][0]['version'])"

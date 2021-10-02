@@ -1,8 +1,0 @@
-FROM alpine:latest as downloader
-RUN apk add --no-cache curl && \
-    curl -L "https://download.jetbrains.com/product?code=IIC&latest&distribution=linux" | tar -xvz && \
-    mv idea* idea
-
-FROM ilteoood/base-x11
-COPY --from=downloader idea /opt/idea
-ENTRYPOINT /opt/idea/bin/idea.sh
