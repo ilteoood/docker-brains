@@ -34,11 +34,6 @@ jobs:
         steps:
             - name: Checkout master
               uses: actions/checkout@master
-            - name: Retrieve latest version
-              id: latest-version
-              run: |
-                version=$(bash ${{ matrix.ide }}/version.sh)
-                echo "::set-output name=ide-version::$version"
             - name: Build and publish image
               uses: ilteoood/docker_buildx@master
               with:
