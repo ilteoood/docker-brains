@@ -30,7 +30,7 @@ jobs:
           fail-fast: false
           matrix:
             ide: ['CLion', 'GoLand', 'IntelliJ Idea Community', 'IntelliJ Idea Education', 'IntelliJ Idea Ultimate', 'PhpStorm', 'PyCharm Education', 'PyCharm Professional', 'RubyMine', 'WebStorm']
-            variant: ['2021.2.3', '2020.3.5']
+            variant: ['2021.2.2', '2020.3.5']
         steps:
             - name: Checkout master
               uses: actions/checkout@master
