@@ -38,12 +38,12 @@ jobs:
               id: latest-version
               run: |
                 ide_name=$(echo ${{ matrix.ide }} | awk '{print tolower($0)}' | tr -s ' ' '-')
-                echo "::set-output name=ide-name::$ide-name"
+                echo "::set-output name=ide-name::$ide_name"
             - name: Build and publish image
               uses: ilteoood/docker_buildx@master
               with:
                 tag: ${{ matrix.variant }}
-                imageName: ilteoood/${{ ide-name }}
+                imageName: ilteoood/${{ steps.latest-version.outputs.ide-name }}
                 platform: linux/amd64,linux/arm64,linux/arm/v7
                 publish: true
                 dockerUser: ilteoood
