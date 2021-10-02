@@ -5,15 +5,31 @@ on:
     - cron: '0 8 * * 1'
 
 jobs:
+    buildBase:
+        runs-on: ubuntu-latest
+        name: Build and publish base image job
+        steps:
+          - name: Checkout master
+            uses: actions/checkout@master
+          - name: Build and publish projector base image
+            uses: ilteoood/docker_buildx@master
+            with:
+              tag: latest
+              imageName: ilteoood/projector-base
+              platform: linux/amd64,linux/arm64,linux/arm/v7
+              publish: true
+              dockerUser: ilteoood
+              dockerPassword: ${{ secrets.DOCKER_HUB_PASSWORD }}
+              dockerFile: base_image/Dockerfile
     buildIde:
-        #needs: [buildBase]
+        needs: [buildBase]
         runs-on: ubuntu-latest
         name: Build and publish image job
         strategy:
           max-parallel: 2
           fail-fast: false
           matrix:
-            ide: ['clion', 'datagrip', 'goland', 'intellij_community', 'intellij_edu', 'intellij_ultimate', 'phpstorm', 'pycharm_edu', 'pycharm_pro', 'rubymine', 'webstorm']
+            ide: ['clion', 'datagrip', 'goland', 'intellij_community', 'intellij_ultimate', 'phpstorm', 'pycharm_community', 'pycharm_pro', 'rubymine', 'webstorm']
             variant: ['2021.2.2']
         steps:
             - name: Checkout master
